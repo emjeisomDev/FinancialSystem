@@ -3,7 +3,7 @@
 namespace Entities.Entities
 {
     [Table("UserFinancialSystem")]
-    internal class UserFinancialSystem 
+    public class UserFinancialSystem 
     {
         public int Id { get; set; }
         public string UserEmail { get; set; }
