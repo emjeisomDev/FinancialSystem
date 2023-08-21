@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Interfaces.Generics;
+using Entities.Entities;
 
 namespace Domain.Interfaces.IUserFinancialSystem
 {
-    public interface InterfaceUserFinancialSystem
+    public interface InterfaceUserFinancialSystem : InterfaceGeneric<UserFinancialSystem>
     {
+        Task<IList<UserFinancialSystem>> ListUsersSystem(int idSystem);
+        Task RemoveUsers(List<UserFinancialSystem> users);
+        Task<UserFinancialSystem> GetUserByEmail(string userEmail);
     }
 }

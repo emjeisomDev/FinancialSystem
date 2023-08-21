@@ -12,12 +12,12 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repository.Generics
 {
-    public class GenericRepository<T> : InterfaceGeneric<T>, IDisposable where T : class
+    public class RepositoryGeneric<T> : InterfaceGeneric<T>, IDisposable where T : class
     {
 
         private readonly DbContextOptions<BaseContext> _OptionsBuilder;
 
-        public GenericRepository()
+        public RepositoryGeneric()
             => _OptionsBuilder = new DbContextOptions<BaseContext>();
         
         public async Task Add(T Object)
