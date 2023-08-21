@@ -1,24 +1,48 @@
 ﻿using Domain.Interfaces.IUserFinancialSystem;
 using Entities.Entities;
+using Infrastructure.Configuration;
 using Infrastructure.Repository.Generics;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repository
 {
     public class RepositoryUserFinancialSystem : RepositoryGeneric<UserFinancialSystem>, InterfaceUserFinancialSystem
     {
-        public Task<UserFinancialSystem> GetUserByEmail(string userEmail)
+
+        private readonly DbContextOptions<BaseContext> _OptionsBuilder;
+        public RepositoryUserFinancialSystem() => _OptionsBuilder = new DbContextOptions<BaseContext>();
+
+        public async Task<IList<UserFinancialSystem>> ListUsersSystem(int idSystem)
         {
-            throw new NotImplementedException();
+            using (var dataBase = new BaseContext(_OptionsBuilder))
+            {
+                return await (
+                    dataBase.UserFinancialSystem
+                    .Where(s => s.IdSystem == idSystem)
+                    ).AsNoTracking().ToListAsync();
+            }
         }
 
-        public Task<IList<UserFinancialSystem>> ListUsersSystem(int idSystem)
+        public async Task<UserFinancialSystem> GetUserByEmail(string userEmail)
         {
-            throw new NotImplementedException();
+            using (var dataBase = new BaseContext(_OptionsBuilder))
+            {
+                return await
+                    dataBase.UserFinancialSystem
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(x => x.UserEmail.Equals(userEmail));
+            }
         }
 
-        public Task RemoveUsers(List<UserFinancialSystem> users)
+        public async Task RemoveUsers(List<UserFinancialSystem> users)
         {
-            throw new NotImplementedException();
+            using (var dataBase = new BaseContext(_OptionsBuilder))
+            {
+                dataBase.UserFinancialSystem
+                .RemoveRange(users);
+
+                await dataBase.SaveChangesAsync();
+            }
         }
     }
 }

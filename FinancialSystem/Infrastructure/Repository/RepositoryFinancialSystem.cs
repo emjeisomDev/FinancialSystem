@@ -1,14 +1,26 @@
 ﻿using Domain.Interfaces.IFinancialSystem;
 using Entities.Entities;
+using Infrastructure.Configuration;
 using Infrastructure.Repository.Generics;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repository
 {
     public class RepositoryFinancialSystem : RepositoryGeneric<FinancialSystem>, InterfaceFinancialSystem
     {
-        public Task<IList<FinancialSystem>> ListUserSystem(string userEmail)
+        private readonly DbContextOptions<BaseContext> _OptionsBuilder;
+        public RepositoryFinancialSystem() => _OptionsBuilder = new DbContextOptions<BaseContext>();
+
+        public async Task<IList<FinancialSystem>> ListUserSystem(string userEmail)
         {
-            throw new NotImplementedException();
+            using (var dataBase = new BaseContext(_OptionsBuilder))
+            {
+                return await(
+                    from s in dataBase.FinancialSystem
+                    join us in dataBase.UserFinancialSystem on s.Id equals us.IdSystem
+                    where us.UserEmail.Equals(userEmail)
+                    select s).AsNoTracking().ToListAsync();
+            }
         }
     }
 }
