@@ -3,7 +3,7 @@ using Entities.Entities;
 
 namespace Domain.Interfaces.ICategory
 {
-    public interface InterfaceCategory : InterfaceGeneric<Category>
+    public interface CategoryInterface : GenericInterface<Category>
     {
         Task<IList<Category>> ListUserCategory(string userEmail);
     }

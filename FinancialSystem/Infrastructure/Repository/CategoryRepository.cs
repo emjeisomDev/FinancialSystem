@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repository
 {
-    public class RepositoryCategory : RepositoryGeneric<Category>, InterfaceCategory
+    public class CategoryRepository : GenericRepository<Category>, CategoryInterface
     {
         private readonly DbContextOptions<BaseContext> _OptionsBuilder;
-        public RepositoryCategory() => _OptionsBuilder = new DbContextOptions<BaseContext>();
+        public CategoryRepository() => _OptionsBuilder = new DbContextOptions<BaseContext>();
 
         public async Task<IList<Category>> ListUserCategory(string userEmail)
         {

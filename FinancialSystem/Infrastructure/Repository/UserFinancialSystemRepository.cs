@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repository
 {
-    public class RepositoryUserFinancialSystem : RepositoryGeneric<UserFinancialSystem>, InterfaceUserFinancialSystem
+    public class UserFinancialSystemRepository : GenericRepository<UserFinancialSystem>, UserFinancialSystemInterface
     {
 
         private readonly DbContextOptions<BaseContext> _OptionsBuilder;
-        public RepositoryUserFinancialSystem() => _OptionsBuilder = new DbContextOptions<BaseContext>();
+        public UserFinancialSystemRepository() => _OptionsBuilder = new DbContextOptions<BaseContext>();
 
         public async Task<IList<UserFinancialSystem>> ListUsersSystem(int idSystem)
         {

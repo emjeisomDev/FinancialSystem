@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repository
 {
-    public class RepositoryFinancialSystem : RepositoryGeneric<FinancialSystem>, InterfaceFinancialSystem
+    public class FinancialSystemRepository : GenericRepository<FinancialSystem>, FinancialSystemInterface
     {
         private readonly DbContextOptions<BaseContext> _OptionsBuilder;
-        public RepositoryFinancialSystem() => _OptionsBuilder = new DbContextOptions<BaseContext>();
+        public FinancialSystemRepository() => _OptionsBuilder = new DbContextOptions<BaseContext>();
 
         public async Task<IList<FinancialSystem>> ListUserSystem(string userEmail)
         {

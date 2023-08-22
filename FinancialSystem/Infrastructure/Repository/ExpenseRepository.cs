@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repository
 {
-    public class RepositoryExpense : RepositoryGeneric<Expense>, InterfaceExpense
+    public class ExpenseRepository : GenericRepository<Expense>, ExpenseInterface
     {
 
         private readonly DbContextOptions<BaseContext> _OptionsBuilder;
-        public RepositoryExpense() => _OptionsBuilder = new DbContextOptions<BaseContext>();
+        public ExpenseRepository() => _OptionsBuilder = new DbContextOptions<BaseContext>();
 
         public async Task<IList<Expense>> ListUserExpense(string userEmail)
         {

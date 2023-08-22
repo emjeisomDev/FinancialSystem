@@ -1,6 +1,6 @@
 ﻿namespace Domain.Interfaces.Generics
 {
-    public interface InterfaceGeneric<T> where T : class
+    public interface GenericInterface<T> where T : class
     {
         Task Add(T Object);
         Task Updade(T Object);

@@ -2,7 +2,9 @@ using Domain.Interfaces.Generics;
 using Domain.Interfaces.ICategory;
 using Domain.Interfaces.IExpense;
 using Domain.Interfaces.IFinancialSystem;
+using Domain.Interfaces.InterfaceServices;
 using Domain.Interfaces.IUserFinancialSystem;
+using Domain.Services;
 using Entities.Entities;
 using Infrastructure.Configuration;
 using Infrastructure.Repository;
@@ -25,11 +27,17 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
        .AddEntityFrameworkStores<BaseContext>();
 
 // Interface and repository
-builder.Services.AddSingleton(typeof(InterfaceGeneric<>), typeof(RepositoryGeneric<>));
-builder.Services.AddSingleton<InterfaceCategory, RepositoryCategory>();
-builder.Services.AddSingleton<InterfaceExpense, RepositoryExpense>();
-builder.Services.AddSingleton<InterfaceFinancialSystem, RepositoryFinancialSystem>();
-builder.Services.AddSingleton<InterfaceUserFinancialSystem, RepositoryUserFinancialSystem>();
+builder.Services.AddSingleton(typeof(GenericInterface<>), typeof(GenericRepository<>));
+builder.Services.AddSingleton<CategoryInterface, CategoryRepository>();
+builder.Services.AddSingleton<ExpenseInterface, ExpenseRepository>();
+builder.Services.AddSingleton<FinancialSystemInterface, FinancialSystemRepository>();
+builder.Services.AddSingleton<UserFinancialSystemInterface, UserFinancialSystemRepository>();
+
+//Service and Domain
+builder.Services.AddSingleton<ICategoryService, CategoryService>();
+builder.Services.AddSingleton<IExpenseService, ExpenseService>();
+builder.Services.AddSingleton<IFinancialSystemService, FinancialSystemService>();
+builder.Services.AddSingleton<IUserFinancialSystemService, UserFinancialSystemService>();
 
 var app = builder.Build();
 

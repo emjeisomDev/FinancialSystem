@@ -3,7 +3,7 @@ using Entities.Entities;
 
 namespace Domain.Interfaces.IFinancialSystem
 {
-    public interface InterfaceFinancialSystem : InterfaceGeneric<FinancialSystem>
+    public interface FinancialSystemInterface : GenericInterface<FinancialSystem>
     {
         Task<IList<FinancialSystem>> ListUserSystem(string userEmail);
     }
