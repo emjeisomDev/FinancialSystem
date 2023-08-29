@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class FinancialSystemController : ControllerBase
     {
         private readonly FinancialSystemInterface _FinancialSystemInterface;
