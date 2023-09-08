@@ -6,7 +6,10 @@ const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'login'},
   {path: 'login', component: LoginComponent},
   {path: '', component: LoginComponent},
-  {path: 'dashboard', loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule),}
+  {path: 'dashboard', loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule),},
+  {path: 'sistema', loadChildren: () => import('./pages/financial-system/financial-system.module').then(m => m.FinancialSystemModule),},
+  {path: 'categoria', loadChildren: () => import('./pages/category/category.module').then(m => m.CategoryModule),},
+  {path: 'despesa', loadChildren: () => import('./pages/expenses/expenses.module').then(m => m.ExpensesModule)}
 ];
 
 @NgModule({

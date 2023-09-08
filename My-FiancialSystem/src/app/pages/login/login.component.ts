@@ -41,7 +41,6 @@ export class LoginComponent {
 
     this.loginService.login(this.dadosForm["email"].value, this.dadosForm["password"].value).subscribe(
       token => {
-        alert(token);
         this.router.navigate(['/dashboard']);
       },
       err => {
