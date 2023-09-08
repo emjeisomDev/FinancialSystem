@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NavbarModule } from 'src/app/components/navbar/navbar.module';
+import { SidebarModule } from 'src/app/components/sidebar/sidebar.module';
 
 import { FinancialSystemRoutingModule } from './financial-system-routing.module';
 import { FinancialSystemComponent } from './financial-system.component';
-import { NavbarModule } from 'src/app/components/navbar/navbar.module';
-import { SidebarModule } from 'src/app/components/sidebar/sidebar.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { SidebarModule } from 'src/app/components/sidebar/sidebar.module';
     CommonModule,
     FinancialSystemRoutingModule,
     NavbarModule,
-    SidebarModule
+    SidebarModule,
+    ReactiveFormsModule
   ],
   exports:[
     FinancialSystemComponent
