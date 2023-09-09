@@ -1,55 +1,52 @@
 import { Component } from '@angular/core';
-
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { LoginService } from 'src/app/services/login.service';
 
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
 
-  constructor(public formBuilder: FormBuilder,
-    private router: Router,
-    private loginService: LoginService) {
+    constructor(public formBuilder: FormBuilder,
+        private router: Router,
+        private loginService: LoginService,
+        public authService: AuthService) { }
 
-  }
+    loginForm!: FormGroup;
 
-  loginForm!: FormGroup;
-
-  ngOnInit(): void {
-
-    this.loginForm = this.formBuilder.group
-      (
-        {
-          email: ['', [Validators.required, Validators.email]],
-          password: ['', [Validators.required]]
-        }
-      )
-  }
+    ngOnInit(): void {
+        this.loginForm = this.formBuilder.group({
+            email: ['', [Validators.required, Validators.email]],
+            password: ['', [Validators.required]]
+        });
+    }
 
 
-  get dadosForm() {
-    return this, this.loginForm.controls;
-  }
+    get dadosForm() {
+        return this, this.loginForm.controls;
+    }
 
 
-  loginUser() {
+    loginUser() {
 
-    this.loginService.login(this.dadosForm["email"].value, this.dadosForm["password"].value).subscribe(
-      token => {
-        this.router.navigate(['/dashboard']);
-      },
-      err => {
-        alert('Ocorreu um erro');
-      }
+        this.loginService.login(this.dadosForm["email"].value, this.dadosForm["password"].value).subscribe(
+            token => {
+                this.authService.setToken(token);
+                this.authService.userAuthenticated(true);
+                this.router.navigate(['/dashboard']);
+            },
+            err => {
+                alert('Ocorreu um erro');
+            }
 
-    )
+        )
 
-  }
+    }
 
 
 }
